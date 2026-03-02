@@ -46,7 +46,6 @@ export default function App() {
       
       <main>
         <Hero onOpenAuth={handleOpenAuth} isLoggedIn={isLoggedIn} />
-        
         <FAQ />
       </main>
 

@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Menu, X, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthModal from "./AuthModal";
 
 export function Logo({ className = "w-10 h-10", iconClassName = "w-6 h-6", variant = "primary" }: { className?: string; iconClassName?: string; variant?: "primary" | "white" }) {
@@ -21,15 +21,24 @@ interface NavbarProps {
 
 export default function Navbar({ onOpenAuth, isLoggedIn }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-6">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2" : "py-6"}`}>
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-        <div className="flex items-center justify-between bg-white/80 backdrop-blur-md px-8 py-4 rounded-full border border-line shadow-sm">
+        <div className={`flex items-center justify-between bg-white/80 backdrop-blur-md transition-all duration-500 border border-line shadow-sm ${scrolled ? "px-6 py-2 rounded-full" : "px-8 py-4 rounded-full"}`}>
           {/* Logo */}
           <div className="flex items-center gap-3 group cursor-pointer">
-            <Logo />
-            <span className="font-display font-bold text-2xl tracking-tighter text-ink">
+            <Logo className={`transition-all duration-500 ${scrolled ? "w-8 h-8" : "w-10 h-10"}`} iconClassName={scrolled ? "w-5 h-5" : "w-6 h-6"} />
+            <span className={`font-display font-bold tracking-tighter text-ink transition-all duration-500 ${scrolled ? "text-xl" : "text-2xl"}`}>
               Bersafar<span className="text-accent">.</span>
             </span>
           </div>
@@ -37,20 +46,20 @@ export default function Navbar({ onOpenAuth, isLoggedIn }: NavbarProps) {
           {/* Right CTA - Desktop */}
           <div className="hidden lg:flex items-center gap-4">
             {isLoggedIn ? (
-              <button className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all border border-primary/20">
-                <User size={20} />
+              <button className={`rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all border border-primary/20 ${scrolled ? "w-10 h-10" : "w-12 h-12"}`}>
+                <User size={scrolled ? 18 : 20} />
               </button>
             ) : (
               <>
                 <button 
                   onClick={() => onOpenAuth("login")}
-                  className="px-6 py-3 text-ink font-bold hover:text-primary transition-colors"
+                  className={`font-bold hover:text-primary transition-all ${scrolled ? "px-4 py-2 text-sm" : "px-6 py-3 text-base"}`}
                 >
                   Masuk
                 </button>
                 <button 
                   onClick={() => onOpenAuth("register")}
-                  className="px-8 py-3 bg-primary text-white rounded-full font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
+                  className={`bg-primary text-white rounded-full font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 ${scrolled ? "px-6 py-2 text-sm" : "px-8 py-3 text-base"}`}
                 >
                   Daftar
                 </button>

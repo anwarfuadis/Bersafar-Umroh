@@ -53,7 +53,7 @@
 
 .text-endless {
   font-family: "Instrument Serif", serif;
-  @apply italic font-normal text-accent;
+  @apply italic font-normal text-gold;
 }
 
 .liquid-glass {
@@ -129,4 +129,12 @@
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -47,13 +47,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login", onSu
             <div className="p-8 md:p-10">
               <div className="mb-8">
                 <h2 className="text-3xl font-display font-bold mb-2">
-                  {mode === "login" ? "Selamat Datang" : mode === "register" ? "Buat Akun" : "Lupa Password"}
+                  {mode === "login" ? "Assalamulaikum" : mode === "register" ? "Buat Akun" : "Lupa Password"}
                 </h2>
                 <p className="text-ink-muted">
                   {mode === "login" 
-                    ? "Masuk untuk melanjutkan perjalananmu." 
+                    ? "Masuk untuk melanjutkan" 
                     : mode === "register"
-                    ? "Daftar untuk mulai merencanakan Umroh Mandiri."
+                    ? "Daftar buat rencanain umroh"
                     : "Masukkan nomor WhatsApp kamu untuk reset password."}
                 </p>
               </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "Apa yang tidak termasuk?",
+    question: "Yang enggak termasuk apa aja?",
     answer: (
       <span>
         Biaya pembuatan paspor, pengeluaran pribadi (laundry, telepon, belanja), kelebihan bagasi, dan <strong>transportasi Makkah-Madinah</strong> (jika tidak mengambil paket full).
@@ -12,15 +12,15 @@ const faqs = [
     ),
   },
   {
-    question: "Apa saja yang sudah termasuk?",
+    question: "Yang udah termasuk apa aja?",
     answer: "Tiket PP, visa, asuransi, hotel bintang 3, makan 3x sehari, sampai air zam-zam.",
   },
   {
-    question: "Cuma berdua, apa bisa berangkat?",
+    question: "Cuma bedua, bisa berangkat kah?",
     answer: "Bisa banget. Mau berangkat berdua saja sama pasangan atau teman tetap bisa. Tidak perlu tunggu rombongan besar kumpul dulu.",
   },
   {
-    question: "Bagaimana dapet harga lebih murah?",
+    question: "Gimana biar dapet harga murah?",
     answer: (
       <div className="space-y-3">
         <p>Harga kami menggunakan sistem kuota progresif. Semakin banyak jamaah yang bergabung di tanggal yang sama, biaya per orang akan otomatis turun karena efisiensi biaya kamar dan operasional.</p>
@@ -34,7 +34,7 @@ const faqs = [
     ),
   },
   {
-    question: "Itinerary Program 9 Hari",
+    question: "Itinerary 9 hari apa aja?",
     answer: (
       <div className="space-y-4">
         {[
@@ -54,7 +54,16 @@ const faqs = [
     ),
   },
   {
-    question: "Kalau butuh bantuan di sana gimana?",
+    question: "Gimana kalo bawa anak?",
+    answer: (
+      <div className="space-y-2">
+        <p><strong>Anak (diatas 2 tahun):</strong> Dikenakan biaya penuh (full price) karena sudah menggunakan seat pesawat dan bed hotel sendiri.</p>
+        <p><strong>Bayi (dibawah 2 tahun):</strong> Dikenakan biaya flat Rp 7.000.000. Biaya ini mencakup tiket pesawat infant (biasanya 50% harga dewasa tergantung maskapai) dan asuransi, namun tidak mendapatkan seat sendiri di pesawat maupun bed di hotel.</p>
+      </div>
+    ),
+  },
+  {
+    question: "kalo butuh bantuan di sana gimana?",
     answer: "Begitu mendarat, langsung kabari tim kami di Jeddah. Mobil jemputan sudah siap antar kamu langsung ke hotel di Makkah.",
   },
 ];
@@ -69,16 +78,16 @@ export default function FAQ() {
           <h2 className="heading-hero">FAQ</h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-3">
           {faqs.map((faq, i) => (
             <div key={i} className="card-premium !p-0 overflow-hidden">
               <button
                 onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                className="w-full p-8 text-left flex items-center justify-between group transition-colors hover:bg-slate-50"
+                className="w-full p-6 text-left flex items-center justify-between group transition-colors hover:bg-slate-50"
               >
-                <span className="font-display font-bold text-2xl group-hover:text-primary transition-colors">{faq.question}</span>
-                <div className={`w-10 h-10 rounded-full border border-line flex items-center justify-center shrink-0 transition-all duration-300 ${activeIndex === i ? 'bg-ink text-white rotate-180' : 'bg-white text-ink group-hover:border-ink'}`}>
-                  <ChevronDown size={20} />
+                <span className="font-display font-bold text-lg group-hover:text-primary transition-colors">{faq.question}</span>
+                <div className={`w-8 h-8 rounded-full border border-line flex items-center justify-center shrink-0 transition-all duration-300 ${activeIndex === i ? 'bg-ink text-white rotate-180' : 'bg-white text-ink group-hover:border-ink'}`}>
+                  <ChevronDown size={16} />
                 </div>
               </button>
               <AnimatePresence>
@@ -89,7 +98,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-8 pt-0 text-lg text-ink-muted leading-relaxed border-t border-line/50">
+                    <div className="p-6 pt-0 text-sm text-ink-muted leading-relaxed border-t border-line/50">
                       {faq.answer}
                     </div>
                   </motion.div>
