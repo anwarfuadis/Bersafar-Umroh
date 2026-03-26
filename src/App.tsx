@@ -7,8 +7,9 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
-import { motion, useScroll, useSpring } from "motion/react";
-import { useState } from "react";
+import About from "./components/About";
+import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
+import { useState, useEffect } from "react";
 import AuthModal from "./components/AuthModal";
 
 export default function App() {
@@ -20,10 +21,16 @@ export default function App() {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentPage, setCurrentPage] = useState<"home" | "about">("home");
   const [authModal, setAuthModal] = useState<{ open: boolean; mode: "login" | "register" }>({
     open: false,
     mode: "login"
   });
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const handleOpenAuth = (mode: "login" | "register") => {
     setAuthModal({ open: true, mode });
@@ -42,14 +49,41 @@ export default function App() {
         style={{ scaleX }}
       />
 
-      <Navbar onOpenAuth={handleOpenAuth} isLoggedIn={isLoggedIn} />
+      <Navbar 
+        onOpenAuth={handleOpenAuth} 
+        isLoggedIn={isLoggedIn} 
+        onNavigate={setCurrentPage}
+        currentPage={currentPage}
+      />
       
       <main>
-        <Hero onOpenAuth={handleOpenAuth} isLoggedIn={isLoggedIn} />
-        <FAQ />
+        <AnimatePresence mode="wait">
+          {currentPage === "home" ? (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Hero onOpenAuth={handleOpenAuth} isLoggedIn={isLoggedIn} />
+              <FAQ />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="about"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <About />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
-      <Footer />
+      <Footer onNavigate={setCurrentPage} />
 
       <AuthModal 
         isOpen={authModal.open} 

@@ -17,9 +17,11 @@ export function Logo({ className = "w-10 h-10", iconClassName = "w-6 h-6", varia
 interface NavbarProps {
   onOpenAuth: (mode: "login" | "register") => void;
   isLoggedIn: boolean;
+  onNavigate: (page: "home" | "about") => void;
+  currentPage: "home" | "about";
 }
 
-export default function Navbar({ onOpenAuth, isLoggedIn }: NavbarProps) {
+export default function Navbar({ onOpenAuth, isLoggedIn, onNavigate, currentPage }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,11 +38,30 @@ export default function Navbar({ onOpenAuth, isLoggedIn }: NavbarProps) {
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
         <div className={`flex items-center justify-between bg-white/80 backdrop-blur-md transition-all duration-500 border border-line shadow-sm ${scrolled ? "px-6 py-2 rounded-full" : "px-8 py-4 rounded-full"}`}>
           {/* Logo */}
-          <div className="flex items-center gap-3 group cursor-pointer">
+          <div 
+            onClick={() => onNavigate("home")}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
             <Logo className={`transition-all duration-500 ${scrolled ? "w-8 h-8" : "w-10 h-10"}`} iconClassName={scrolled ? "w-5 h-5" : "w-6 h-6"} />
             <span className={`font-display font-bold tracking-tighter text-ink transition-all duration-500 ${scrolled ? "text-xl" : "text-2xl"}`}>
               Bersafar<span className="text-accent">.</span>
             </span>
+          </div>
+
+          {/* Nav Links - Desktop */}
+          <div className="hidden lg:flex items-center gap-8">
+            <button 
+              onClick={() => onNavigate("home")}
+              className={`font-bold transition-all hover:text-primary ${currentPage === "home" ? "text-primary" : "text-ink/60"}`}
+            >
+              Beranda
+            </button>
+            <button 
+              onClick={() => onNavigate("about")}
+              className={`font-bold transition-all hover:text-primary ${currentPage === "about" ? "text-primary" : "text-ink/60"}`}
+            >
+              Tentang Kami
+            </button>
           </div>
 
           {/* Right CTA - Desktop */}
@@ -81,6 +102,27 @@ export default function Navbar({ onOpenAuth, isLoggedIn }: NavbarProps) {
           animate={{ opacity: 1, y: 0 }}
           className="lg:hidden absolute top-24 left-6 right-6 bg-white rounded-[32px] p-8 flex flex-col gap-4 shadow-2xl border border-line"
         >
+          <div className="flex flex-col gap-2 mb-4">
+            <button 
+              onClick={() => {
+                onNavigate("home");
+                setIsOpen(false);
+              }}
+              className={`text-left py-3 font-bold ${currentPage === "home" ? "text-primary" : "text-ink"}`}
+            >
+              Beranda
+            </button>
+            <button 
+              onClick={() => {
+                onNavigate("about");
+                setIsOpen(false);
+              }}
+              className={`text-left py-3 font-bold ${currentPage === "about" ? "text-primary" : "text-ink"}`}
+            >
+              Tentang Kami
+            </button>
+          </div>
+
           {isLoggedIn ? (
             <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">

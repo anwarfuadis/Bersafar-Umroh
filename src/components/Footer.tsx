@@ -1,7 +1,11 @@
 import { MessageCircle, Instagram, Mail, ArrowRight } from "lucide-react";
 import { Logo } from "./Navbar";
 
-export default function Footer() {
+interface FooterProps {
+  onNavigate: (page: "home" | "about") => void;
+}
+
+export default function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-ink text-white pt-32 pb-12 px-6 md:px-12 lg:px-32 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
@@ -30,8 +34,8 @@ export default function Footer() {
           <div>
             <h4 className="font-mono text-xs font-black uppercase tracking-[0.3em] text-white/20 mb-10">Navigasi</h4>
             <ul className="space-y-6 text-lg font-bold">
-              <li><a href="#cara-kerja" className="text-white/60 hover:text-white transition-colors">Cara Kerja</a></li>
-              <li><a href="#harga" className="text-white/60 hover:text-white transition-colors">Harga Paket</a></li>
+              <li><button onClick={() => onNavigate("home")} className="text-white/60 hover:text-white transition-colors">Beranda</button></li>
+              <li><button onClick={() => onNavigate("about")} className="text-white/60 hover:text-white transition-colors">Tentang Kami</button></li>
               <li><a href="#faq" className="text-white/60 hover:text-white transition-colors">Pertanyaan Umum</a></li>
               <li><a href="#" className="text-white/60 hover:text-white transition-colors">Kebijakan Privasi</a></li>
             </ul>
