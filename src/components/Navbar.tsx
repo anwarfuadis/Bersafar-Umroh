@@ -17,8 +17,8 @@ export function Logo({ className = "w-10 h-10", iconClassName = "w-6 h-6", varia
 interface NavbarProps {
   onOpenAuth: (mode: "login" | "register") => void;
   isLoggedIn: boolean;
-  onNavigate: (page: "home" | "about") => void;
-  currentPage: "home" | "about";
+  onNavigate: (page: "home" | "about" | "cerita" | "admin") => void;
+  currentPage: "home" | "about" | "cerita" | "admin";
 }
 
 export default function Navbar({ onOpenAuth, isLoggedIn, onNavigate, currentPage }: NavbarProps) {
@@ -55,6 +55,12 @@ export default function Navbar({ onOpenAuth, isLoggedIn, onNavigate, currentPage
               className={`font-bold transition-all hover:text-primary ${currentPage === "home" ? "text-primary" : "text-ink/60"}`}
             >
               Beranda
+            </button>
+            <button 
+              onClick={() => onNavigate("cerita")}
+              className={`font-bold transition-all hover:text-primary ${currentPage === "cerita" ? "text-primary" : "text-ink/60"}`}
+            >
+              Cerita Safar
             </button>
             <button 
               onClick={() => onNavigate("about")}
@@ -111,6 +117,15 @@ export default function Navbar({ onOpenAuth, isLoggedIn, onNavigate, currentPage
               className={`text-left py-3 font-bold ${currentPage === "home" ? "text-primary" : "text-ink"}`}
             >
               Beranda
+            </button>
+            <button 
+              onClick={() => {
+                onNavigate("cerita");
+                setIsOpen(false);
+              }}
+              className={`text-left py-3 font-bold ${currentPage === "cerita" ? "text-primary" : "text-ink"}`}
+            >
+              Cerita Safar
             </button>
             <button 
               onClick={() => {

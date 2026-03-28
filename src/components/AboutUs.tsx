@@ -18,7 +18,7 @@ export default function AboutUs() {
               Transformasi Digital Ibadah
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold text-ink leading-[0.9] tracking-tighter mb-8">
-              Mendefinisikan Ulang <span className="text-primary italic">Umroh</span> di Era Fleksibilitas.
+              Mendefinisikan Ulang <span className="text-primary font-handwritten text-6xl md:text-8xl">Umroh</span> di Era Fleksibilitas.
             </h1>
             <p className="text-xl text-ink/60 leading-relaxed mb-10 max-w-xl">
               Bersafar hadir untuk meruntuhkan batasan tradisional dalam perjalanan ibadah. Kami menggabungkan spiritualitas mendalam dengan teknologi modern untuk memberikan kontrol penuh kepada jamaah.
@@ -40,8 +40,8 @@ export default function AboutUs() {
           >
             <div className="aspect-square rounded-[64px] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
               <img 
-                src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&q=80&w=1000" 
-                alt="Modern Pilgrimage Experience" 
+                src="https://picsum.photos/seed/makkah/1000/1000" 
+                alt="Ka'ba Makkah" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />

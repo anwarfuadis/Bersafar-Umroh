@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "article": {
+      "title": "Article",
+      "description": "An article for the Cerita Safar section.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the article."
+        },
+        "content": {
+          "type": "string",
+          "description": "The full content of the article in Markdown format."
+        },
+        "author": {
+          "type": "string",
+          "description": "The author of the article."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the article was created."
+        },
+        "imageUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the cover image."
+        },
+        "excerpt": {
+          "type": "string",
+          "description": "A short summary of the article."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the article (e.g., Safar, Sejarah)."
+        }
+      },
+      "required": ["title", "content", "author", "createdAt", "imageUrl", "excerpt", "category"]
+    },
+    "user": {
+      "title": "User",
+      "description": "A user of the application.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "displayName": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": "article",
+      "description": "Collection of articles for Cerita Safar."
+    },
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Collection of user profiles and roles."
+    }
+  }
+}

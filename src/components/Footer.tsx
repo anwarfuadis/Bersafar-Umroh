@@ -2,7 +2,7 @@ import { MessageCircle, Instagram, Mail, ArrowRight } from "lucide-react";
 import { Logo } from "./Navbar";
 
 interface FooterProps {
-  onNavigate: (page: "home" | "about") => void;
+  onNavigate: (page: "home" | "about" | "cerita" | "admin") => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
@@ -35,9 +35,9 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h4 className="font-mono text-xs font-black uppercase tracking-[0.3em] text-white/20 mb-10">Navigasi</h4>
             <ul className="space-y-6 text-lg font-bold">
               <li><button onClick={() => onNavigate("home")} className="text-white/60 hover:text-white transition-colors">Beranda</button></li>
+              <li><button onClick={() => onNavigate("cerita")} className="text-white/60 hover:text-white transition-colors">Cerita Safar</button></li>
               <li><button onClick={() => onNavigate("about")} className="text-white/60 hover:text-white transition-colors">Tentang Kami</button></li>
               <li><a href="#faq" className="text-white/60 hover:text-white transition-colors">Pertanyaan Umum</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Kebijakan Privasi</a></li>
             </ul>
           </div>
 
